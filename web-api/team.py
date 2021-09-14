@@ -1,0 +1,28 @@
+from bottle import get, post, error, abort, request, response, HTTPResponse, route , run
+import root
+import sqlite3
+
+
+#creat a team 
+# http --verbose POST localhost:5300/Teams/ TeamName="test" 
+@route('/Teams/', method='POST')
+def CreateTeam(TeamsDB):
+    Team = request.json
+
+    if not Team:
+        abort(400)
+    
+    try:
+        Team['Team_id'] = root.execute(TeamsDB, '''
+            INSERT INTO Teams(TeamName) VALUES
+            (:TeamName)
+            ''', Team)
+       
+    except sqlite3.IntegrityError as e:
+        abort(409, str(e))
+
+    response.status = 201
+    return Team
+
+
+

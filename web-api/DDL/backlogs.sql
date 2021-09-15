@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS productbacklog;
 
 CREATE TABLE productbacklog (
     Item_id INTEGER primary key NOT NULL,
-    Product_id VARCHAR NOT NULL,
+    Product_id INTEGER NOT NULL,
     description VARCHAR NOT NULL
 );
 INSERT INTO productbacklog(Product_id,description) VALUES

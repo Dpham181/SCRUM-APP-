@@ -24,5 +24,14 @@ def CreateTeam(TeamsDB):
     response.status = 201
     return Team
 
+# list all team that user joinned 
+# http --verbose GET localhost:5300/Teams/1 
 
+@route('/Teams/<User_id>', method='GET')
+def GetProductBL(User_id,TeamsDB):
+    Teams = root.query(TeamsDB, 'select TeamName from Teams where Team_id =(select MTeam_id from Members where MUser_id = ?)',[User_id])
+    if not Teams:
+        abort(400)
+    rep = {'Teams': Teams}    
+    return HTTPResponse(rep,200)
 

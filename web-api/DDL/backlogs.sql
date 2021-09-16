@@ -13,8 +13,8 @@ CREATE TABLE productbacklog (
     description VARCHAR NOT NULL
 );
 INSERT INTO productbacklog(Product_id,description) VALUES
-(1,"project 1 requirement 1"),
-(1,"project 1 requirement 2"),
+(1,"CREATING PROJECT"),
+(1,"REMOVING MEMBERS"),
 (2,"project 2 requirement 1"),
 (2,"project 2 requirement 2"),
 (3,"project 3 requirement 1"),
@@ -23,15 +23,16 @@ INSERT INTO productbacklog(Product_id,description) VALUES
 
 CREATE TABLE sprintbacklog(
     Sprint_id INTEGER primary key NOT NULL,
-    PItem_id VARCHAR NOT NULL,
+    PItem_id INTEGER NOT NULL,
+    Iteration_Number INTEGER NOT NULL,
     Use_Stories VARCHAR NOT NULL,
     Status VARCHAR NOT NULL DEFAULT 'I', 
     FOREIGN KEY(PItem_id) REFERENCES productbacklog(Item_id)
 );
 
-INSERT INTO sprintbacklog(PItem_id,Use_Stories) VALUES
-(1,"AS AN USER I WANT A MAKE PROJECT BUTTON"),
-(2,"AS AN USER I WANT A REMOVE MEMBER");
+INSERT INTO sprintbacklog(PItem_id,Iteration_Number,Use_Stories) VALUES
+(1,1,"AS AN USER I WANT A MAKE PROJECT BUTTON"),
+(2,1,"AS AN USER I WANT A REMOVE MEMBER");
 
 
 COMMIT;

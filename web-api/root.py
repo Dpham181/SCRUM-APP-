@@ -3,7 +3,7 @@ import sys
 import sqlite3
 import bottle
 from bottle.ext import sqlite
-import textwrap
+from bottle import HTTPResponse,request, abort
 
 
 
@@ -59,3 +59,21 @@ def execute(db, sql, args=()):
     return id
 
 
+def PostMethod(DB,QUERY,KEYS):
+    payload = request.json
+
+    if not payload:
+        abort(400)
+
+    posted_fields = payload.keys()
+    required_fields = KEYS
+
+    if not required_fields <= posted_fields:
+        abort(400, f'Missing fields: {required_fields - posted_fields}')
+
+    try:
+        payload['id'] = execute(DB, QUERY, payload)
+    except sqlite3.IntegrityError as e:
+        abort(409, str(e))
+
+    return HTTPResponse(payload,201)

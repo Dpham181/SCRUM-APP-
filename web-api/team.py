@@ -7,21 +7,12 @@ import sqlite3
 # http --verbose POST localhost:5300/Teams/ TeamName="test" 
 @route('/Teams/', method='POST')
 def CreateTeam(TeamsDB):
-    Team = request.json
-
-    if not Team:
-        abort(400)
-    
-    try:
-        Team['Team_id'] = root.execute(TeamsDB, '''
+    statement = '''
             INSERT INTO Teams(TeamName) VALUES
             (:TeamName)
-            ''', Team)
-       
-    except sqlite3.IntegrityError as e:
-        abort(409, str(e))
-
-    response.status = 201
+            '''
+    Team = root.PostMethod(TeamsDB,statement,{'TeamName'})
+   
     return Team
 
 # list all team that user joinned 

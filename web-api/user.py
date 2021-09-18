@@ -4,7 +4,7 @@ import sqlite3
 
 
 #signup user 
-#http --verbose POST localhost:5100/Users/ UserName="test6" PassWord="123
+#http --verbose POST localhost:5100/Users/ UserName="test6" PassWord="123"
 @route('/Users/', method='POST')
 def createUser(UsersDB):
     statement = '''INSERT INTO users(UserName,PassWord) VALUES(:UserName, :PassWord)'''

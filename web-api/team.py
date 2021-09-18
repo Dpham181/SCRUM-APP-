@@ -4,7 +4,7 @@ import sqlite3
 
 
 #creat a team 
-# http --verbose POST localhost:5300/Teams/ TeamName="test" 
+# http --verbose POST localhost:5300/Teams/ TeamName="test" User_id="4"
 @route('/Teams/', method='POST')
 def CreateTeam(TeamsDB):
     statement = '''
@@ -12,8 +12,24 @@ def CreateTeam(TeamsDB):
             (:TeamName)
             '''
     Team = root.PostMethod(TeamsDB,statement,{'TeamName'})
-   
-    return Team
+
+    stmt = '''INSERT INTO Members(MUser_id,MTeam_id,Member_Role) VALUES (?,?,?)'''
+    stmt_ReqKeys ={'MUser_id','MTeam_id','Member_Role'}
+    Team.body['role'] = 3
+    Product_Onwer = root.execute(TeamsDB,stmt,[Team.body])
+
+    if not Product_Onwer:
+     abort(404)
+    return Product_Onwer
+
+#todo 
+# after having a team then assign Product onwer role to the user that created the team.
+    
+    Product_onwer['Member_id'] = root.execute(TeamsDB, stmt,Member)
+    if not Product_onwer:
+        abort(404)
+    
+    return Product_onwer
 
 # list all team that user joinned 
 # http --verbose GET localhost:5300/Teams/1 

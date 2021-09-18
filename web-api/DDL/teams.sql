@@ -37,9 +37,9 @@ CREATE TABLE Members(
     FOREIGN KEY(MTeam_id) REFERENCES Teams(Team_id)
     UNIQUE(MUser_id,MTeam_id)
 );
-INSERT INTO Members(MUser_id,MTeam_id) VALUES
-(1,1),
-(2,2),
-(3,3);
+INSERT INTO Members(MUser_id,MTeam_id,Member_Role) VALUES
+(1,1,3),
+(2,2,3),
+(3,3,3);
 
 COMMIT;

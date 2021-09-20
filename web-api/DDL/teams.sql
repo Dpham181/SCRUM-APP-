@@ -38,8 +38,8 @@ CREATE TABLE Members(
     UNIQUE(MUser_id,MTeam_id)
 );
 INSERT INTO Members(MUser_id,MTeam_id,Member_Role) VALUES
-(1,1,3),
-(2,2,3),
-(3,3,3);
+(1,1,4),
+(2,2,4),
+(3,3,4);
 
 COMMIT;

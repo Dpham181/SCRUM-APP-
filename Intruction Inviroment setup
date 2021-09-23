@@ -1,0 +1,24 @@
+
+
+################### Web services #############################
+Install the pip package installer and other command-line tools by running the following commands:
+
+sudo apt update
+
+sudo apt install --yes python3-pip ruby-foreman httpie sqlite3
+
+Use the python3 command to run Python and pip from the terminal.
+
+Install Bottle and the Bottle-Sqlite plugin by running the following command:
+
+python3 -m pip install bottle bottle-sqlite
+
+
+
+################### Web app #################################
+
+sudo apt install nodejs npm
+
+npm install -g express-generator
+
+express --view=pug  web-app

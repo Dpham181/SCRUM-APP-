@@ -1,3 +1,6 @@
+"use strict" 
+
+
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -6,7 +9,7 @@ const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
 
-var app = express();
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

@@ -22,4 +22,4 @@ sudo apt install nodejs npm
 
 npm install -g express-generator
 
-express --view=pug  web-app
+express --view=ejs  web-app

@@ -21,11 +21,11 @@ module.exports = {
 
   // login  page
 
-/*
 
-  AuthenticatePage: (req, res) => {
+
+  login: (req, res) => {
     if (!req.body.uname || !req.body.psw) {
-      res.send('Http error code 400: missing parameters')
+      res.render('error', {'message':"Missing Parameter"});
     }
     let authUrl = "/";
     const User = UserController.getUserbyUserName(req.body.uname);
@@ -57,6 +57,7 @@ module.exports = {
 
 
   },
+  /*
   // logout
   Logout: (req, res) => {
     if (req.session && req.session.user) {

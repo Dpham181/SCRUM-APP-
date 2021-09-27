@@ -12,13 +12,16 @@ def createUser(UsersDB):
     return rep
 
 #authenticate user
+#http --verbose POST localhost:5100/auth/ UserName="DANH" PassWord="123"
+
 @route('/auth/', method='POST')
 def checkPassword(UsersDB):
     user = request.json
-    userpassword = root.query(UsersDB, 'SELECT PassWord FROM users WHERE UserName = ?;' ,[user['username']], one = True);
+    print(user)
+    userpassword = root.query(UsersDB, 'SELECT PassWord FROM users WHERE UserName = ?;' ,[user['UserName']], one = True);
     if not userpassword:
         return HTTPResponse({'Authentication':False},404)
-    if userpassword['PassWord'] == user['password']:
+    if userpassword['PassWord'] == user['PassWord']:
         return HTTPResponse({'Authentication':True},200)
     return HTTPResponse({'Authentication':False},401)
 

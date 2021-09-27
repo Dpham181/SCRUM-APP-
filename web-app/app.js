@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
+const SignInRouter = require('./routes/SignIn');
 
 const app = express();
 
@@ -19,9 +20,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-//app.use(express.static(path.join(__dirname, "node_modules/mdb-ui-kit/css")));
 
 app.use('/', indexRouter);
+app.use('/', SignInRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

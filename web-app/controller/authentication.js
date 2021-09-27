@@ -3,7 +3,7 @@
 
 const bcrypt = require('bcryptjs');
 const xssFilters = require('xss-filters');
-
+const axios = require("axios");
 
 
 
@@ -19,22 +19,33 @@ module.exports = {
   },
 
 
-  // login  page
+  // login  func
 
 
 
-  login: (req, res) => {
+   SignIn: async (req, res) => {
+    
     if (!req.body.uname || !req.body.psw) {
       res.render('error', {'message':"Missing Parameter"});
     }
     let authUrl = "/";
-    const User = UserController.getUserbyUserName(req.body.uname);
     const username = xssFilters.inHTMLData(req.body.uname);
     const password = xssFilters.inHTMLData(req.body.psw);
-    if(Object.entries(User).length === 0){
-      return res.redirect(req.get('referer'));
+    
+    const user = {UserName:username, PassWord:password}
+    try {
+      await axios.post("http://localhost:5100/auth/", user);
+      //authenticated 
+        res.send("authenticated")
+      
+    }
+    catch (error) {
+      // fail to authenticate
+      res.send("fail to authenticate")
 
     }
+
+   /*
       if (User.username === username) {
         const hashpass = User.password;
 
@@ -52,7 +63,7 @@ module.exports = {
         });
       }
 
-
+*/
     
 
 

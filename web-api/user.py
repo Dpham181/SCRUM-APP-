@@ -18,11 +18,11 @@ def createUser(UsersDB):
 def checkPassword(UsersDB):
     user = request.json
     print(user)
-    userpassword = root.query(UsersDB, 'SELECT PassWord FROM users WHERE UserName = ?;' ,[user['UserName']], one = True);
+    userpassword = root.query(UsersDB, 'SELECT User_id, PassWord FROM users WHERE UserName = ?;' ,[user['UserName']], one = True);
     if not userpassword:
         return HTTPResponse({'Authentication':False},404)
     if userpassword['PassWord'] == user['PassWord']:
-        return HTTPResponse({'Authentication':True},200)
+        return HTTPResponse({"User_id":userpassword['User_id']},200)
     return HTTPResponse({'Authentication':False},401)
 
 

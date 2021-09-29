@@ -34,9 +34,10 @@ module.exports = {
     
     const user = {UserName:username, PassWord:password}
     try {
-      await axios.post("http://localhost:5100/auth/", user);
+      const reponse = await axios.post("http://localhost:5100/auth/", user);
       //authenticated 
-        res.send("authenticated")
+        console.log(reponse);
+        res.send("authenticated");
       
     }
     catch (error) {

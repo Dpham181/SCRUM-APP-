@@ -3,3 +3,4 @@ userServices: python3 -m bottle --bind=localhost:$PORT --debug --reload user
 ProjectServices: python3 -m bottle --bind=localhost:$PORT --debug --reload project
 TeamServices: python3 -m bottle --bind=localhost:$PORT --debug --reload team
 BacklogsServices: python3 -m bottle --bind=localhost:$PORT --debug --reload backlogs
+GateWay: python3 -m bottle --bind=localhost:$PORT --debug --reload gateway

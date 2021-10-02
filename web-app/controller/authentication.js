@@ -34,10 +34,11 @@ module.exports = {
     
     const user = {UserName:username, PassWord:password}
     try {
-      const reponse = await axios.post("http://localhost:5100/auth/", user);
+      const reponse = await axios.post("http://localhost:5500/auth/", user);
       //authenticated 
-        console.log(reponse);
-        res.send("authenticated");
+      req.session.Authenticated = reponse.data.User_id;
+
+      return res.redirect("/main")
       
     }
     catch (error) {
@@ -46,38 +47,24 @@ module.exports = {
 
     }
 
-   /*
-      if (User.username === username) {
-        const hashpass = User.password;
-
-        bcrypt.compare(password, hashpass, function (err, ress) {
-          if (ress) {
-            authUrl = "/main" ;
-            req.session.user = User.username;
-            res.setHeader("Content-Type", "text/html")
-
-            return res.redirect(authUrl)
-
-          }
-          return res.redirect(authUrl)
-
-        });
-      }
-
-*/
+ 
     
 
 
   },
-  /*
   // logout
   Logout: (req, res) => {
-    if (req.session && req.session.user) {
+    console.log('jump1')
+    if (req.session && req.session.Authenticated) {
+      console.log('jump2')
+
         req.session.reset();
         return res.redirect('/') 
     }
       
   },
+  /*
+  
 
 
   // register page

@@ -41,6 +41,9 @@ background: linear-gradient(to bottom left, rgba(48, 156, 125, 1.0), rgba(37, 61
     font-family: 'Exo', sans-serif;
    
 }
+.navbar-light .navbar-nav .nav-link{
+    color: aliceblue;
+}
 
 header{
     display: flex;

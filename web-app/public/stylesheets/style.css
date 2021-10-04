@@ -39,6 +39,7 @@ background: -webkit-linear-gradient(top right, rgba(48, 156, 125, 1.0), rgba(37,
 background: -moz-linear-gradient(top right, rgba(48, 156, 125, 1.0), rgba(37, 61, 171, 1.0));
 background: linear-gradient(to bottom left, rgba(48, 156, 125, 1.0), rgba(37, 61, 171, 1.0));
     font-family: 'Exo', sans-serif;
+    height: 100vh;
    
 }
 .navbar-light .navbar-nav .nav-link{

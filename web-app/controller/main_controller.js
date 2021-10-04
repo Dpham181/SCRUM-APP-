@@ -11,14 +11,23 @@ module.exports = {
 
 
   // main page
-  getMainPage: (req, res) => {
+  getMainPage: async (req, res) => {
     if (req.session && req.session.Authenticated) {
-      
-        return res.render('main', {USERID:req.session.Authenticated});
+      const userid = req.session.Authenticated;
+      try {
+
+        const reponse = await axios.get("http://localhost:5500/Users/Profile", {params:{id:userid}});
+        const userprofile = reponse.data.profile
+        
+        return res.render('main', {userprofile:userprofile[0]});
+        
+      }
+      catch (error) {
+  
+      }
 
     }
     return res.redirect('/')
-
   },
 
 

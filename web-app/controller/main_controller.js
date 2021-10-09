@@ -5,7 +5,7 @@
 const xssFilters = require('xss-filters');
 const axios = require("axios");
 
-
+const gateway = require("../bin/Gateway");
 
 module.exports = {
 
@@ -15,9 +15,9 @@ module.exports = {
     if (req.session && req.session.Authenticated) {
       const userid = req.session.Authenticated;
       try {
-
-        const reponse = await axios.get("http://localhost:5500/Users/Profile", {params:{id:userid}});
-        const userprofile = reponse.data.profile
+        
+        const reponse = await axios.get(gateway + "/Users/Profile", {params:{id:userid}});
+        const userprofile = reponse.data.Profile
         
         return res.render('main', {userprofile:userprofile[0]});
         

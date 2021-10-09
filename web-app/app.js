@@ -33,12 +33,13 @@ app.use(cookieParser());
 const indexRouter = require('./routes/index');
 const SignInRouter = require('./routes/SignIn');
 const LogoutRouter = require('./routes/logout');
-
 const MainRouter = require('./routes/main');
+const RegisterRouter = require('./routes/register');
 
 
 app.use('/', indexRouter);
 app.use('/SignIn/', SignInRouter);
+app.use('/Register/', RegisterRouter);
 app.use('/LogOut/', LogoutRouter);
 app.use('/main', MainRouter);
 

@@ -5,8 +5,8 @@ const bcrypt = require('bcryptjs');
 const xssFilters = require('xss-filters');
 const axios = require("axios");
 
-
-
+const gateway = require("../bin/Gateway");
+const user_info = require("../model/user");
 // authentication system 
 module.exports = {
 
@@ -28,13 +28,13 @@ module.exports = {
     if (!req.body.uname || !req.body.psw) {
       res.render('error', {'message':"Missing Parameter"});
     }
-    let authUrl = "/";
-    const username = xssFilters.inHTMLData(req.body.uname);
-    const password = xssFilters.inHTMLData(req.body.psw);
+    let user = Object.create(user_info);
+    user.UserName = xssFilters.inHTMLData(req.body.uname);
+    user.PassWord = xssFilters.inHTMLData(req.body.psw);
     
-    const user = {UserName:username, PassWord:password}
+    
     try {
-      const reponse = await axios.post("http://localhost:5500/auth/", user);
+      const reponse = await axios.post(gateway + "/auth/", user);
       //authenticated 
       req.session.Authenticated = reponse.data.User_id;
 
@@ -54,49 +54,39 @@ module.exports = {
   },
   // logout
   Logout: (req, res) => {
-    console.log('jump1')
+   
     if (req.session && req.session.Authenticated) {
-      console.log('jump2')
-
+   
         req.session.reset();
         return res.redirect('/') 
     }
       
   },
-  /*
+  
   
 
 
   // register page
-  RegisterPage: (req, res) => {
-    const saltRounds = 10;
+  RegisterPage: async (req, res) => {
+  
 
     if (!req.body.uname || !req.body.psw) {
       return res.redirect('/')
     }
-
-    let Users = UserController.getUser();
-    const userDB = UserController.getUserbyUserName(req.body.uname); 
-
-    if(Object.entries(userDB).length === 0){
-    const username = xssFilters.inHTMLData(req.body.uname);
-    const password = xssFilters.inHTMLData(req.body.psw);
-    const autoIncrement =  Users.length +1;
-    bcrypt.hash(password, saltRounds, function(err, hash) {
-    user.userId = autoIncrement;
-    user.username = username;
-    user.password = hash;
-    UserController.setUser(user)
-
-    });
-   
-
-    return res.redirect("/");
-    }
-    return res.redirect('/')
-
     
+   
+    try{
+      let user = Object.create(user_info);
+      user.UserName = xssFilters.inHTMLData(req.body.uname);
+      user.PassWord = xssFilters.inHTMLData(req.body.psw);
+        
+      const reponse = await axios.post(gateway+"/Users/",user)
+      console.log(reponse.data)
+    }
+    catch(error){
+
+    }
 
   },
-  */
+  
 }

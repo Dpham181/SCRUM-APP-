@@ -41,7 +41,7 @@
         <!-- Email input -->
         <div class="form-outline mb-4">
           <input type="text" id="loginName" name="uname"class="form-control" />
-          <label class="form-label" for="loginName">Email or username</label>
+          <label class="form-label" for="loginName">username</label>
         </div>
   
         <!-- Password input -->
@@ -87,56 +87,75 @@
       role="tabpanel"
       aria-labelledby="tab-register"
     >
-      <form>
-       
-  
-        <!-- Name input -->
-        <div class="form-outline mb-4">
-          <input type="text" id="registerName" class="form-control" />
-          <label class="form-label" for="registerName">Name</label>
+      <form action="/Register/" method="post">
+        <div class="row mb-4">
+          <div class="col">
+            <div class="form-outline">
+              <input type="text" name="uname" id="form6Example1" class="form-control" />
+              <label class="form-label" for="form6Example1">UserName</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-outline">
+              <input type="text" name="psw" id="form6Example2" class="form-control" />
+              <label class="form-label" for="form6Example2">Password</label>
+            </div>
+          </div>
         </div>
   
-        <!-- Username input -->
-        <div class="form-outline mb-4">
-          <input type="text" id="registerUsername" class="form-control" />
-          <label class="form-label" for="registerUsername">Username</label>
-        </div>
-  
-        <!-- Email input -->
-        <div class="form-outline mb-4">
-          <input type="email" id="registerEmail" class="form-control" />
-          <label class="form-label" for="registerEmail">Email</label>
-        </div>
-  
-        <!-- Password input -->
-        <div class="form-outline mb-4">
-          <input type="password" id="registerPassword" class="form-control" />
-          <label class="form-label" for="registerPassword">Password</label>
-        </div>
-  
-        <!-- Repeat Password input -->
-        <div class="form-outline mb-4">
-          <input type="password" id="registerRepeatPassword" class="form-control" />
-          <label class="form-label" for="registerRepeatPassword">Repeat password</label>
-        </div>
-  
-        <!-- Checkbox -->
-        <div class="form-check d-flex justify-content-center mb-4">
-          <input
-            class="form-check-input me-2"
-            type="checkbox"
-            value=""
-            id="registerCheck"
-            checked
-            aria-describedby="registerCheckHelpText"
-          />
-          <label class="form-check-label" for="registerCheck">
-            I have read and agree to the terms
-          </label>
-        </div>
-  
-        <!-- Submit button -->
-        <button type="submit"  formaction="/register" class="btn btn-primary btn-block mb-3">Sign in</button>
+       <!-- 2 column grid layout with text inputs for the first and last names -->
+  <div class="row mb-4">
+    <div class="col">
+      <div class="form-outline">
+        <input type="text" name="fname" id="form6Example1" class="form-control" />
+        <label class="form-label" for="form6Example1">First name</label>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-outline">
+        <input type="text" name="lname" id="form6Example2" class="form-control" />
+        <label class="form-label" for="form6Example2">Last name</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Text input -->
+  <div class="form-outline mb-4">
+    <input type="text" name="country" id="form6Example3" class="form-control" />
+    <label class="form-label" for="form6Example3">Country</label>
+  </div>
+
+  <!-- Text input -->
+  <div class="form-outline mb-4">
+    <input type="number" name="zipcode" id="form6Example4" class="form-control" />
+    <label class="form-label" for="form6Example4">ZipCode</label>
+  </div>
+
+  <!-- text input -->
+  <div class="form-outline mb-4">
+    <input type="text" name="city" id="form6Example5" class="form-control" />
+    <label class="form-label" for="form6Example5">City</label>
+  </div>
+
+  <!-- text input -->
+  <div class="form-outline mb-4">
+    <input type="text" name="street" id="form6Example6" class="form-control" />
+    <label class="form-label" for="form6Example6">Street</label>
+  </div>
+  <div class="form-outline mb-4">
+    <input type="text" name ="state" id="form6Example6" class="form-control" />
+    <label class="form-label" for="form6Example6">State</label>
+  </div>
+  <!-- Message input -->
+  <div class="form-outline mb-4">
+    <textarea class="form-control" name="bio" id="form6Example7" rows="4"></textarea>
+    <label class="form-label" for="form6Example7">BIO INFORMATION </label>
+  </div>
+
+ 
+
+  <!-- Submit button -->
+  <button type="submit" class="btn btn-primary btn-block mb-4">Sign Up </button>
       </form>
     </div>
   </div>

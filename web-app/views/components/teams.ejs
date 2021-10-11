@@ -19,8 +19,27 @@
         ></button>
       </div>
 
-      <div class="modal-body">
+      <div class="modal-body ">
+          <div class="d-md-inline-flex flex-row justify-content-center "> 
+            <% for(let i =0 ;  i < teams.length ; i++) {%>
+     
+        <div class="card pad">
+           
+            <div class="card-body">
+              <h5 class="card-title"><%=teams[i].TeamName%></h5>
+              <p class="card-text">
+                Some quick example text to build on the card title and make up the bulk of the
+                card's content.
+              </p>
+              <a href="#!" class="btn btn-primary">Button</a>
+            </div>
+          </div>
+        
+          <% }%>
 
+        
+        </div>
+       
         <table class="table table-bordered">
             <thead>
               <tr>
@@ -40,27 +59,25 @@
             </tbody>
           </table>
           <!-- Default form contact -->
-            
-          <form asp-action="/Teams/" asp-controller="Client" method="POST" id="modal-details">
+            <div class="d-flex justify-content-center align-items-center">
+            <form action="/Teams/"  method="post" >
 
             <!-- 2 column grid layout with text inputs for the first and last names -->
-       <div class="row mb-4">
-         <div class="col">
-           <div class="form-outline">
-             <input  required type="text" name="fname" id="form6Example1" class="form-control" />
-             <label class="form-label" for="form6Example1"><%= userprofile.FIRST_NAME %>
-             </label>
-           </div>
-         </div>
-         <div class="col">
-           <div class="form-outline">
-             <input  required type="text" name="lname" id="form6Example2" class="form-control" />
-             <label class="form-label" for="form6Example2"><%= userprofile.LAST_NAME %></a>
-             </label>
-           </div>
-         </div>
-       </div>
-    </form>
+            <div class="form-outline mb-4">
+                <input type="text" required id="form4Example1" class="form-control" />
+                <label class="form-label" for="form4Example1">Team Name</label>
+              </div>
+            
+              <!-- Email input -->
+              <div class="form-outline mb-4">
+                <input type="number" required  min=2 max=6 id="form4Example2" class="form-control" />
+                <label class="form-label" for="form4Example2">Team Size(2-6)</label>
+              </div>
+
+              <button  type="submit" class="btn btn-secondary" > Create new Team</button>
+
+            </form></div>
+          
 
       </div>
       <div class="modal-footer">
@@ -68,9 +85,6 @@
         <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
           Close
         </button>
-        <button  type="submit" form='modal-details' class="btn btn-secondary" >
-            add
-          </button>
       </div>
 
     </div>

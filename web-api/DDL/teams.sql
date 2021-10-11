@@ -11,13 +11,16 @@ DROP TABLE IF EXISTS Teams;
 CREATE TABLE Teams(
     Team_id INTEGER primary key NOT NULL,
     TeamName VARCHAR NOT NULL,
+    Size INTEGER NOT NULL default 0,
     UNIQUE(TeamName)
 
 );
-INSERT INTO Teams(TeamName) VALUES
-("DANH_Team"),
-("CONG_Team"),
-("PHAM_Team");
+INSERT INTO Teams(TeamName,Size) VALUES
+("DANH_Team",4),
+("DANH_Team2",5),
+("DANH_Team3",6),
+("CONG_Team",5),
+("PHAM_Team",5);
 CREATE TABLE Roles(
     Role_id INTEGER primary key not null,
     Title VARCHAR Not null,
@@ -38,8 +41,10 @@ CREATE TABLE Members(
     UNIQUE(MUser_id,MTeam_id)
 );
 INSERT INTO Members(MUser_id,MTeam_id,Member_Role) VALUES
-(1,1,4),
-(2,2,4),
-(3,3,4);
+(1,1,2),
+(1,2,3),
+(1,3,4),
+(2,4,4),
+(3,5,4);
 
 COMMIT;

@@ -1,0 +1,87 @@
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="profile"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">My Profile</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-mdb-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+
+
+        <form action="/Register/" method="post">
+            
+      
+           <!-- 2 column grid layout with text inputs for the first and last names -->
+      <div class="row mb-4">
+        <div class="col">
+          <div class="form-outline">
+            <input  required type="text" name="fname" id="form6Example1" class="form-control" />
+            <label class="form-label" for="form6Example1"><%= userprofile.FIRST_NAME %>
+            </label>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-outline">
+            <input  required type="text" name="lname" id="form6Example2" class="form-control" />
+            <label class="form-label" for="form6Example2"><%= userprofile.LAST_NAME %></a>
+            </label>
+          </div>
+        </div>
+      </div>
+    
+      <!-- Text input -->
+      <div class="form-outline mb-4">
+        <input required type="text" name="country" id="form6Example3" class="form-control" />
+        <label class="form-label" for="form6Example3"><%= userprofile.COUNTRY %></label>
+      </div>
+    
+      <!-- Text input -->
+      <div class="form-outline mb-4">
+        <input required type="number" name="zipcode" id="form6Example4" class="form-control" />
+        <label class="form-label" for="form6Example4"><%= userprofile.ZIPCODE %></label>
+      </div>
+    
+      <!-- text input -->
+      <div class="form-outline mb-4">
+        <input required type="text" name="city" id="form6Example5" class="form-control" />
+        <label class="form-label" for="form6Example5"><%= userprofile.CITY %></label>
+      </div>
+    
+      <!-- text input -->
+      <div class="form-outline mb-4">
+        <input required ype="text" name="street" id="form6Example6" class="form-control" />
+        <label class="form-label" for="form6Example6"><%= userprofile.STREET %></label>
+      </div>
+      <div class="form-outline mb-4">
+        <input required type="text" name ="state" id="form6Example6" class="form-control" />
+        <label class="form-label" for="form6Example6"><%= userprofile.STATE %></label>
+      </div>
+      <!-- Message input -->
+      <div class="form-outline mb-4">
+        <textarea class="form-control" name="bio" id="form6Example7" rows="4"></textarea>
+        <label class="form-label" for="form6Example7">BIO INFORMATION </label>
+      </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
+          Close
+        </button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

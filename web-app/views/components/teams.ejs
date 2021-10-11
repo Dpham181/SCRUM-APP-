@@ -1,0 +1,80 @@
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="Teams"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">My Teams</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-mdb-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      <div class="modal-body">
+
+        <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">Team Name</th>
+                <th scope="col">Team Size</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+                <% for(let i =0 ;  i < teams.length ; i++) {%>
+              <tr>
+                <td><%=teams[i].TeamName%></td>
+                <td><%=teams[i].Size%></td>
+
+              </tr>
+              <% }%>
+            </tbody>
+          </table>
+          <!-- Default form contact -->
+            
+          <form asp-action="/Teams/" asp-controller="Client" method="POST" id="modal-details">
+
+            <!-- 2 column grid layout with text inputs for the first and last names -->
+       <div class="row mb-4">
+         <div class="col">
+           <div class="form-outline">
+             <input  required type="text" name="fname" id="form6Example1" class="form-control" />
+             <label class="form-label" for="form6Example1"><%= userprofile.FIRST_NAME %>
+             </label>
+           </div>
+         </div>
+         <div class="col">
+           <div class="form-outline">
+             <input  required type="text" name="lname" id="form6Example2" class="form-control" />
+             <label class="form-label" for="form6Example2"><%= userprofile.LAST_NAME %></a>
+             </label>
+           </div>
+         </div>
+       </div>
+    </form>
+
+      </div>
+      <div class="modal-footer">
+          
+        <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
+          Close
+        </button>
+        <button  type="submit" form='modal-details' class="btn btn-secondary" >
+            add
+          </button>
+      </div>
+
+    </div>
+  </div>
+  
+</div>    
+

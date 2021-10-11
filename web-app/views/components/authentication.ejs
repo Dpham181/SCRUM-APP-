@@ -40,13 +40,13 @@
   
         <!-- Email input -->
         <div class="form-outline mb-4">
-          <input type="text" id="loginName" name="uname"class="form-control" />
+          <input required type="text" id="loginName" name="uname"class="form-control" />
           <label class="form-label" for="loginName">username</label>
         </div>
   
         <!-- Password input -->
         <div class="form-outline mb-4">
-          <input type="password"  name="psw" id="loginPassword" class="form-control" />
+          <input  required type="password"  name="psw" id="loginPassword" class="form-control" />
           <label class="form-label" for="loginPassword">Password</label>
         </div>
   
@@ -78,7 +78,10 @@
         <!-- Register buttons -->
         <div class="text-center">
           <p>Not a member? <a href="#!">Register</a></p>
+          <span style="color:red"><%= error %></span>
+
         </div>
+        
       </form>
     </div>
     <div
@@ -91,13 +94,13 @@
         <div class="row mb-4">
           <div class="col">
             <div class="form-outline">
-              <input type="text" name="uname" id="form6Example1" class="form-control" />
+              <input required type="text" name="uname" id="form6Example1" class="form-control" />
               <label class="form-label" for="form6Example1">UserName</label>
             </div>
           </div>
           <div class="col">
             <div class="form-outline">
-              <input type="text" name="psw" id="form6Example2" class="form-control" />
+              <input  required type="text" name="psw" id="form6Example2" class="form-control" />
               <label class="form-label" for="form6Example2">Password</label>
             </div>
           </div>
@@ -107,13 +110,13 @@
   <div class="row mb-4">
     <div class="col">
       <div class="form-outline">
-        <input type="text" name="fname" id="form6Example1" class="form-control" />
+        <input  required type="text" name="fname" id="form6Example1" class="form-control" />
         <label class="form-label" for="form6Example1">First name</label>
       </div>
     </div>
     <div class="col">
       <div class="form-outline">
-        <input type="text" name="lname" id="form6Example2" class="form-control" />
+        <input  required type="text" name="lname" id="form6Example2" class="form-control" />
         <label class="form-label" for="form6Example2">Last name</label>
       </div>
     </div>
@@ -121,29 +124,29 @@
 
   <!-- Text input -->
   <div class="form-outline mb-4">
-    <input type="text" name="country" id="form6Example3" class="form-control" />
+    <input required type="text" name="country" id="form6Example3" class="form-control" />
     <label class="form-label" for="form6Example3">Country</label>
   </div>
 
   <!-- Text input -->
   <div class="form-outline mb-4">
-    <input type="number" name="zipcode" id="form6Example4" class="form-control" />
+    <input required type="number" name="zipcode" id="form6Example4" class="form-control" />
     <label class="form-label" for="form6Example4">ZipCode</label>
   </div>
 
   <!-- text input -->
   <div class="form-outline mb-4">
-    <input type="text" name="city" id="form6Example5" class="form-control" />
+    <input required type="text" name="city" id="form6Example5" class="form-control" />
     <label class="form-label" for="form6Example5">City</label>
   </div>
 
   <!-- text input -->
   <div class="form-outline mb-4">
-    <input type="text" name="street" id="form6Example6" class="form-control" />
+    <input required ype="text" name="street" id="form6Example6" class="form-control" />
     <label class="form-label" for="form6Example6">Street</label>
   </div>
   <div class="form-outline mb-4">
-    <input type="text" name ="state" id="form6Example6" class="form-control" />
+    <input required type="text" name ="state" id="form6Example6" class="form-control" />
     <label class="form-label" for="form6Example6">State</label>
   </div>
   <!-- Message input -->
@@ -153,6 +156,7 @@
   </div>
 
  
+  <span style="color:red"><%= error %></span>
 
   <!-- Submit button -->
   <button type="submit" class="btn btn-primary btn-block mb-4">Sign Up </button>

@@ -4,12 +4,12 @@ import sqlite3
 
 
 #creat a team 
-# http --verbose POST localhost:5300/Teams/ TeamName="test" User_id="4"
+# http --verbose POST localhost:5300/Teams/ TeamName="test" User_id="4" Size="3"
 @route('/Teams/', method='POST')
 def CreateTeam(TeamsDB):
     statement = '''
             INSERT INTO Teams(TeamName) VALUES
-            (:TeamName)
+            (:TeamName,:Size)
             '''
     Team = root.PostMethod(TeamsDB,statement,{'TeamName'})
 
@@ -35,7 +35,7 @@ def CreateTeam(TeamsDB):
 
 @route('/Teams/<User_id>', method='GET')
 def ListUserTeam(User_id,TeamsDB):
-    Teams = root.query(TeamsDB, 'select TeamName from Teams where Team_id =(select MTeam_id from Members where MUser_id = ?)',[User_id])
+    Teams = root.query(TeamsDB, 'select Team_id, TeamName, Size from Teams where Team_id IN (select MTeam_id from Members where MUser_id = ?)',[User_id])
     if not Teams:
         abort(400)
     rep = {'Teams': Teams}    

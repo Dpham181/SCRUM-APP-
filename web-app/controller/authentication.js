@@ -14,7 +14,7 @@ module.exports = {
   // home page
   getHomePage: (req, res) => {
 
-    res.render('index', { title: 'Welcome to Scrum App homepage' });
+    res.render('index', { title: 'Welcome to Scrum App', error:'' });
 
   },
 
@@ -43,8 +43,7 @@ module.exports = {
     }
     catch (error) {
       // fail to authenticate
-      res.send("fail to authenticate")
-
+      res.render('index', { title: 'Welcome to Scrum App', error:'Username Or Password Incorrect' });
     }
 
  
@@ -70,21 +69,26 @@ module.exports = {
   RegisterPage: async (req, res) => {
   
 
-    if (!req.body.uname || !req.body.psw) {
-      return res.redirect('/')
-    }
-    
-   
     try{
       let user = Object.create(user_info);
       user.UserName = xssFilters.inHTMLData(req.body.uname);
       user.PassWord = xssFilters.inHTMLData(req.body.psw);
-        
+      user.FIRST_NAME = xssFilters.inHTMLData(req.body.fname);
+      user.LAST_NAME = xssFilters.inHTMLData(req.body.lname);
+      user.COUNTRY = xssFilters.inHTMLData(req.body.country);
+      user.ZIPCODE = xssFilters.inHTMLData(req.body.zipcode);
+      user.CITY = xssFilters.inHTMLData(req.body.city);
+      user.STREET = xssFilters.inHTMLData(req.body.street);
+      user.STATE = xssFilters.inHTMLData(req.body.state);
+
       const reponse = await axios.post(gateway+"/Users/",user)
-      console.log(reponse.data)
+      user.PUSER_ID = reponse.data.id
+      await axios.post(gateway+"/Users/Profile/",user)
+      return res.redirect(req.get('referer'));
+
     }
     catch(error){
-
+      res.render('index', { title: 'Welcome to Scrum App', error:'There are some info that already exits' });
     }
 
   },

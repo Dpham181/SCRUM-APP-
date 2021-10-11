@@ -20,6 +20,8 @@
          <span>My Projects</span>
      </a>
         <a
+        data-mdb-toggle="modal"
+              data-mdb-target="#Teams"
            href="#"
            class="list-group-item list-group-item-action py-2 ripple "
            >
@@ -110,7 +112,8 @@
               class="dropdown-menu dropdown-menu-end"
               aria-labelledby="navbarDropdownMenuLink"
               >
-            <li><a class="dropdown-item" href="#">My profile</a></li>
+            <li><a data-mdb-toggle="modal"
+              data-mdb-target="#profile" class="dropdown-item" href="#">My profile</a></li>
             <li><a class="dropdown-item" href="/LogOut/">Logout</a></li>
           </ul>
         </li>

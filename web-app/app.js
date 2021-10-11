@@ -34,6 +34,8 @@ const indexRouter = require('./routes/index');
 const SignInRouter = require('./routes/SignIn');
 const LogoutRouter = require('./routes/logout');
 const MainRouter = require('./routes/main');
+const createTeam = require('./routes/createTeam');
+
 const RegisterRouter = require('./routes/register');
 
 
@@ -43,6 +45,7 @@ app.use('/Register/', RegisterRouter);
 app.use('/LogOut/', LogoutRouter);
 app.use('/main', MainRouter);
 
+app.use('/Teams/', createTeam);
 
 app.use(express.static(path.join(__dirname, 'public')));
 // catch 404 and forward to error handler

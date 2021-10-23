@@ -21,21 +21,7 @@
 
       <div class="modal-body ">
           <div class="d-md-inline-flex flex-row justify-content-center "> 
-            <% for(let i =0 ;  i < teams.length ; i++) {%>
-     
-        <div class="card pad">
-           
-            <div class="card-body">
-              <h5 class="card-title"><%=teams[i].TeamName%></h5>
-              <p class="card-text">
-                Some quick example text to build on the card title and make up the bulk of the
-                card's content.
-              </p>
-              <a href="#!" class="btn btn-primary">Button</a>
-            </div>
-          </div>
-        
-          <% }%>
+            
 
         
         </div>
@@ -45,7 +31,6 @@
               <tr>
                 <th scope="col">Team Name</th>
                 <th scope="col">Team Size</th>
-                <th scope="col">Status</th>
               </tr>
             </thead>
             <tbody>
@@ -64,13 +49,13 @@
 
             <!-- 2 column grid layout with text inputs for the first and last names -->
             <div class="form-outline mb-4">
-                <input type="text" required id="form4Example1" class="form-control" />
+                <input type="text" name="TeamName" required id="form4Example1" class="form-control" />
                 <label class="form-label" for="form4Example1">Team Name</label>
               </div>
             
               <!-- Email input -->
               <div class="form-outline mb-4">
-                <input type="number" required  min=2 max=6 id="form4Example2" class="form-control" />
+                <input type="number" name="Size" required  min=2 max=6 id="form4Example2" class="form-control" />
                 <label class="form-label" for="form4Example2">Team Size(2-6)</label>
               </div>
 

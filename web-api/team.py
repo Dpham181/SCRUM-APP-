@@ -7,28 +7,20 @@ import sqlite3
 # http --verbose POST localhost:5300/Teams/ TeamName="test" User_id="4" Size="3"
 @route('/Teams/', method='POST')
 def CreateTeam(TeamsDB):
+    Payload = request.json
     statement = '''
-            INSERT INTO Teams(TeamName) VALUES
+            INSERT INTO Teams(TeamName,Size) VALUES
             (:TeamName,:Size)
             '''
-    Team = root.PostMethod(TeamsDB,statement,{'TeamName'})
-
-    stmt = '''INSERT INTO Members(MUser_id,MTeam_id,Member_Role) VALUES (?,?,?)'''
-    stmt_ReqKeys ={'MUser_id','MTeam_id','Member_Role'}
-    Team.body['role'] = 4
-    Team.body['Member_id'] = root.execute(TeamsDB,stmt,[Team.body['User_id'],Team.body['id'], Team.body['role']])
-
-    if not  Team.body:
+    Team = root.PostMethod(TeamsDB,statement,{'TeamName','Size'})
+    if not Team:
      abort(404)
-    return  Team.body
-
-# after having a team then assign Product onwer role to the user that created the team.
     
-    Product_onwer['Member_id'] = root.execute(TeamsDB, stmt,Member)
-    if not Product_onwer:
-        abort(404)
+    stmt = '''INSERT INTO Members(MUser_id,MTeam_id,Member_Role) VALUES (?,?,?)'''
+   
+    root.execute(TeamsDB,stmt,[Payload['User_id'],Team.body['id'], 4])
     
-    return Product_onwer
+    return Team
 
 # list all teams that user joinned 
 # http --verbose GET localhost:5300/Teams/1 

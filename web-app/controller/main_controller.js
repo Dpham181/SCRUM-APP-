@@ -4,9 +4,10 @@
 
 const xssFilters = require('xss-filters');
 const axios = require("axios");
-
+const popup_msg = require('alert');
+const notifier = require('node-notifier');
 const gateway = require("../bin/Gateway");
-
+const team = require("../model/team");
 module.exports = {
 
 
@@ -18,11 +19,9 @@ module.exports = {
         // profile 
         const reponse = await axios.get(gateway + "/Users/Profile", {params:{id:userid}});
         const userprofile = reponse.data.Profile
-        console.log(userprofile[0])
         // teams 
 
         const myteams = await axios.get(gateway + "/Teams/"+ userid);
-        console.log(myteams.data.Teams)
 
         return res.render('main', {userprofile:userprofile[0],teams: myteams.data.Teams});
         
@@ -39,19 +38,27 @@ module.exports = {
 
   //create new team 
 
-  CreateTeam:  (req, res) => {
-    console.log('test')
-    return res.redirect('/')
-    /*
+  CreateTeam:  async (req, res) => {
+   
+    const userid = req.session.Authenticated;
+    
     try {
-     const TeamName = xssFilters.inHTMLData(req.body.TeamName);
-      const Size = xssFilters.inHTMLData(req.body.Size);
-      const NewTeam = {'User_id':userid, 'TeamName':TeamName, 'Size':Size};
-      await axios(gateway+"/Teams/",NewTeam);
+      const NewTeam = Object.create(team);
+      console.log(NewTeam)
+      NewTeam.User_id = userid;
+      NewTeam.TeamName = xssFilters.inHTMLData(req.body.TeamName);
+      NewTeam.Size = xssFilters.inHTMLData(req.body.Size);
+      await axios.post(gateway+"/Teams/",NewTeam);
+    
+      return res.redirect(req.get('referer'));
+
+
     } catch (error) {
-      console.log(error)
+     
+      return res.redirect(req.get('referer'));
+
     }
-*/
+
   },
 
 

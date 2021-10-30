@@ -19,6 +19,7 @@
     "mdb-ui-kit": "^3.9.0",
     "morgan": "~1.9.1",
     "node-notifier": "^10.0.0",
+    "url": "^0.11.0",
     "xss-filters": "^1.2.7"
   }
 }

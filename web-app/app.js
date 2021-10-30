@@ -37,14 +37,14 @@ const MainRouter = require('./routes/main');
 const createTeam = require('./routes/createTeam');
 
 const RegisterRouter = require('./routes/register');
-
+const ProjectsRouter = require('./routes/projects');
 
 app.use('/', indexRouter);
 app.use('/SignIn/', SignInRouter);
 app.use('/Register/', RegisterRouter);
 app.use('/LogOut/', LogoutRouter);
 app.use('/main', MainRouter);
-
+app.use('/main/projects',  ProjectsRouter);
 app.use('/Teams/', createTeam);
 
 app.use(express.static(path.join(__dirname, 'public')));

@@ -11,8 +11,11 @@
   <body>
     <%- include('components/profile'); %>
     <%- include('components/teams'); %>
+    <% if (context){ %>
 
-    <%- include('components/user_maincontext'); %>
+    <%- include('components/' + context); %>
+
+    <%}%>
 
 
   </body>

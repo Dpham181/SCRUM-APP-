@@ -15,5 +15,13 @@ def MakeProject(PojectsDB):
     
     return project
 
+#list all the user's projects 
 
+def ListProjects():
 
+   
+
+    # team id already offers in front end 
+    # list all the project that the team does
+     # by given team id now we can do nested query of teamproject to get back the project as whole
+    return null

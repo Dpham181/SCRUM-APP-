@@ -20,9 +20,6 @@ module.exports = {
         const reponse = await axios.get(gateway + "/Users/Profile", {params:{id:userid}});
         const userprofile = reponse.data.Profile
         // teams 
-        const url = require('url')
-          const pathurl = req.originalUrl;
-        console.log(pathurl.hash) // #some/u
         const myteams = await axios.get(gateway + "/Teams/"+ userid);
       
         return res.render('main', {userprofile:userprofile[0],teams: myteams.data.Teams, context:'main_context'});
@@ -46,8 +43,17 @@ module.exports = {
        
         const myteams = await axios.get(gateway + "/Teams/"+ userid);
         // project query 
-        //todo
-        return res.render('main', {userprofile:userprofile[0],teams: myteams.data.Teams, context:'projects_context'});
+        let teamsinfo = myteams.data.Teams; 
+        let Teams_Id = []; 
+        for (let i = 0; i< teamsinfo.length ;i++ ){
+          Teams_Id.push(teamsinfo[i].Team_id)
+
+         }
+         const Idjson = {TPTeam_id:Teams_Id.join(',')};
+        const myprojects = await axios.post(gateway + "/Projects", Idjson);
+       
+       console.log(myprojects.data)
+        return res.render('main', {userprofile:userprofile[0],teams: teamsinfo, context:'projects_context'});
         
       }
       catch (error) {

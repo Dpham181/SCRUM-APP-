@@ -20,18 +20,17 @@ def MakeProject(PojectsDB):
  # team id already offers in front end 
     # list all the project that the team does
      # by given team id now we can do nested query of teamproject to get back the project as whole
-    
+ 
+
+
 @route('/Projects', method='POST')
 def ListProjects(PojectsDB):
     TPTeam_id = request.json
     print(TPTeam_id)
-    listofprojects=[]
-    TPTeam_ids = TPTeam_id['TPTeam_id'].split(",")
-    for id in TPTeam_ids:
-     Projects = root.query(PojectsDB, 'select Title, description from Projects where Project_id in (select TPproject_id from  TeamProjects where TPteam_id = ?)',[id])
-     listofprojects.append(Projects)
-    if not listofprojects:
+    Projects = root.query(PojectsDB, 'select Title, description, Deathline from Projects where Project_id IN (select TPproject_id from  TeamProjects where TPteam_id = ?)',[TPTeam_id['id']])
+    if not Projects:
         abort(400)
-    rep = {'Projects': listofprojects}    
+    print(Projects)
+    rep = {'Projects': Projects}    
     return HTTPResponse(rep,200)
    

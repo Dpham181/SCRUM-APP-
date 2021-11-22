@@ -19,9 +19,10 @@ module.exports = {
         // profile 
         const reponse = await axios.get(gateway + "/Users/Profile", {params:{id:userid}});
         const userprofile = reponse.data.Profile
+        req.session.userprofile = userprofile[0]
         // teams 
         const myteams = await axios.get(gateway + "/Teams/"+ userid);
-      
+        req.session.teams = myteams.data.Teams
         return res.render('main', {userprofile:userprofile[0],teams: myteams.data.Teams, context:'main_context'});
         
       }
@@ -32,28 +33,29 @@ module.exports = {
     }
     return res.redirect('/')
   },
-  getProjectPage: async (req, res) => {
+  getProjectPage:  (req, res) => {
     if (req.session && req.session.Authenticated) {
-      const userid = req.session.Authenticated;
+      
+        return res.render('main', {userprofile:req.session.userprofile,teams:  req.session.teams, context:'projects_context', Projects:null});
+        
+    
+    }
+    return res.redirect('/')
+  },
+ 
+  getProjectContext: async (req, res) => {
+    if (req.session && req.session.Authenticated) {
       try {
-        // profile 
-        const reponse = await axios.get(gateway + "/Users/Profile", {params:{id:userid}});
-        const userprofile = reponse.data.Profile
-        // teams 
-       
-        const myteams = await axios.get(gateway + "/Teams/"+ userid);
-        // project query 
-        let teamsinfo = myteams.data.Teams; 
-        let Teams_Id = []; 
-        for (let i = 0; i< teamsinfo.length ;i++ ){
-          Teams_Id.push(teamsinfo[i].Team_id)
+      
+        
+         const data = {'id':req.body.team_id}
+         const myprojects = await axios.post(gateway + "/Projects", data);
+        
+        console.log(myprojects.data.Projects)
+         return res.render('main', {userprofile:req.session.userprofile,teams:  req.session.teams, context:'projects_context', Projects:myprojects.data.Projects});
 
-         }
-         const Idjson = {TPTeam_id:Teams_Id.join(',')};
-        const myprojects = await axios.post(gateway + "/Projects", Idjson);
+         
        
-       console.log(myprojects.data)
-        return res.render('main', {userprofile:userprofile[0],teams: teamsinfo, context:'projects_context'});
         
       }
       catch (error) {
@@ -64,7 +66,6 @@ module.exports = {
     return res.redirect('/')
   },
  
-
   //create new team 
 
   CreateTeam:  async (req, res) => {

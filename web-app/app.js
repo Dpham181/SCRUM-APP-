@@ -38,6 +38,7 @@ const createTeam = require('./routes/createTeam');
 
 const RegisterRouter = require('./routes/register');
 const ProjectsRouter = require('./routes/projects');
+const Projects_contextRouter = require('./routes/projects_context');
 
 app.use('/', indexRouter);
 app.use('/SignIn/', SignInRouter);
@@ -46,6 +47,7 @@ app.use('/LogOut/', LogoutRouter);
 app.use('/main', MainRouter);
 app.use('/main/projects',  ProjectsRouter);
 app.use('/Teams/', createTeam);
+app.use('/projects',  Projects_contextRouter);
 
 app.use(express.static(path.join(__dirname, 'public')));
 // catch 404 and forward to error handler

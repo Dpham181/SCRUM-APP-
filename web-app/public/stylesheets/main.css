@@ -1,19 +1,18 @@
-body {
-  background: rgba(48, 156, 125, 1.0);
+html,body {
 background: -webkit-linear-gradient(top right, rgba(48, 156, 125, 1.0), rgba(37, 61, 171, 1.0));
-background: -moz-linear-gradient(top right, rgba(48, 156, 125, 1.0), rgba(37, 61, 171, 1.0));
-background: linear-gradient(to bottom left, rgba(48, 156, 125, 1.0), rgba(37, 61, 171, 1.0));
     font-family: 'Exo', sans-serif;
   height: 100%;
   }
 
 @media (min-width: 991.98px) {
   main {
-  
     padding-left: 240px;
   }
 }
-
+select{
+  border:0px;
+  outline:0px;
+}
 /* Sidebar */
 .sidebar {
   

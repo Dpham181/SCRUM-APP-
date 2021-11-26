@@ -35,7 +35,7 @@ def ListUserTeam(User_id,TeamsDB):
 
 # list all members of a team
 # http --verbose GET localhost:5300/Members Team_id="1"
-@route('/Members', method='GET')
+@route('/Members', method='POST')
 def ListMembers(TeamsDB):
     MTeam_id = request.json
     Members = root.query(TeamsDB, 'select Member_id,MUser_id, Member_Role from Members where MTeam_id =? ',[MTeam_id['Team_id']])

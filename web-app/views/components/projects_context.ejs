@@ -1,24 +1,27 @@
 <!--Main layout-->
 
-<main style="margin-top: 58px">
-    <div class="container pt-4">
-      <form method="POST" action="/projects">
-        <select name="team_id" required>
-          <% for(let i =0 ;  i < teams.length ; i++) {%>
-            <option value='<%=teams[i].Team_id%>'><%=teams[i].TeamName%></option>
-            <% }%>
-     
-        </select>
-        <input type="submit" value="Submit">
-
-      </form>
       <!---->
       <section  id="Overview" class="mb-4">
         
+     
+
+      
         <div class="card">
           <div class="card-header text-center py-3">
             <h5 class="mb-0 text-center">
-              <strong>My Projects Overview</strong>
+              <Strong>Please Choose Team:</Strong>
+              <form method="POST" action="/projects">
+                <div> 
+                  <select class="browser-default custom-select" name="team_id" onchange="this.form.submit();" required>
+                  <% for(let i =0 ;  i < teams.length ; i++) {%>
+                    <option value='<%=teams[i].Team_id%>'><%=teams[i].TeamName%></option>
+                    <% }%>
+             
+                </select></div>
+             
+        
+              </form>
+        
             </h5>
           </div>
           <div class="card-body">
@@ -71,5 +74,4 @@
       </section>
     
     
-    </div>
-  </main>
+   

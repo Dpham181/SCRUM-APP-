@@ -29,25 +29,37 @@ app.use(cookieParser());
 
 
 
-// routers
-const indexRouter = require('./routes/index');
-const SignInRouter = require('./routes/SignIn');
-const LogoutRouter = require('./routes/logout');
-const MainRouter = require('./routes/main');
-const createTeam = require('./routes/createTeam');
-
-const RegisterRouter = require('./routes/register');
-const ProjectsRouter = require('./routes/projects');
-const Projects_contextRouter = require('./routes/projects_context');
-
+// routers 
+// pages routing 
+const indexRouter = require('./routes/pages/index');
+const MainRouter = require('./routes/pages/main');
 app.use('/', indexRouter);
+app.use('/main', MainRouter);
+
+// authentication routing 
+const SignInRouter = require('./routes/authentication/SignIn');
+const LogoutRouter = require('./routes/authentication/logout');
+const RegisterRouter = require('./routes/authentication/register');
 app.use('/SignIn/', SignInRouter);
 app.use('/Register/', RegisterRouter);
 app.use('/LogOut/', LogoutRouter);
-app.use('/main', MainRouter);
-app.use('/main/projects',  ProjectsRouter);
+
+// team routing 
+const ShowTeams = require('./routes/Team/showTeams');
+const createTeam = require('./routes/Team/createTeam');
+const viewMemebers = require('./routes/Team/viewMemebers');
+
+app.use('/Teams', ShowTeams);
 app.use('/Teams/', createTeam);
+app.use('/Memebers', viewMemebers);
+
+// project routing 
+const ProjectsRouter = require('./routes/project/projects');
+const Projects_contextRouter = require('./routes/project/projects_context');
+app.use('/main/projects',  ProjectsRouter);
 app.use('/projects',  Projects_contextRouter);
+
+
 
 app.use(express.static(path.join(__dirname, 'public')));
 // catch 404 and forward to error handler

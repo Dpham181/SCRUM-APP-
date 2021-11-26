@@ -3,8 +3,8 @@
 
 const express = require('express');
 const router = express.Router();
-const Main_controller =  require('../controller/main_controller')
+const Main_controller =  require('../../controller/project_controller')
 /* GET main/projects page. */
-router.get('/',Main_controller.getProjectPage);
+router.post('/',Main_controller.getProjectContext);
 
 module.exports = router;

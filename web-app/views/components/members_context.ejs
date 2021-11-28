@@ -1,0 +1,119 @@
+<section  id="Overview" class="mb-4">
+        
+    <div class="card">
+      <div class="card-header text-center py-3">
+        <h5 class="mb-0 text-center">
+          <strong>Members Overview</strong>
+        </h5>
+      </div>
+      <div class="card-body">
+           
+      
+                <% if(Members) {%>
+  
+                  <% for(let i =0 ;  i < Members.length ; i++) {%>
+            
+
+
+            
+        <div class="container py-5 h-100 w-100">
+          <div class="row d-flex  align-items-center h-100">
+            <div class="col col-lg-6 mb-4 mb-lg-0">
+              <div class="card mb-3" style="border-radius: .5rem;">
+                <div class="row g-0">
+                  <div class="col-md-4 gradient-custom text-center " style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+                    <img
+                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.png"
+                      alt="..."
+                      class="img-fluid my-5"
+                      style="width: 80px;"
+                    />
+                    <h5><%=member_background[i].FIRST_NAME%>, <%=member_background[i].LAST_NAME%></h5>
+                    <p><%=Members[i].Member_Role%></p>
+                    <form action="/submit" method="post">
+                        <input type="hidden" name="Member_id" value="<%=Members[i].Member_id%>" >
+                        
+                        <button
+                        type="submit"
+                        formaction="/Layoff"
+                        class="btn btn-outline-danger btn-rounded"
+                        data-mdb-ripple-color="dark"
+                      >
+                  Layoff
+            
+                      </button>
+                      <button
+                      type="submit"
+                      formaction="/Promote"
+                      class="btn btn-outline-info btn-rounded"
+                      data-mdb-ripple-color="dark"
+                    >
+                      Promote
+                    </button>
+                  </form>
+                    <i class="far fa-edit mb-5"></i>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body p-4">
+                      <h6>Information</h6>
+                      <hr class="mt-0 mb-4">
+                      <div class="row pt-1">
+                        <div class="col-6 mb-3">
+                          <h6>Email</h6>
+                          <p class="text-muted"><%=member_background[i].EMAIL%></p>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <h6>PHONE</h6>
+                            <p class="text-muted"><%=member_background[i].PHONE%></p>
+                          </div>
+                       
+                      </div>
+                      <h6>Address</h6>
+                      <hr class="mt-0 mb-4">
+                      <div class="row pt-1">
+                        <div class="col-6 mb-3">
+                          <h6>Recent</h6>
+                          <p class="text-muted"><%=member_background[i].STREET%>,
+                            <%=member_background[i].CITY%>,
+                            <%=member_background[i].STATE%>,
+                            <%=member_background[i].ZIPCODE%>,
+                            <%=member_background[i].COUNTRY%>
+
+                        </p>
+                        </div>
+                      
+                      </div>
+                      <div class="d-flex justify-content-start">
+                        <a href="#!"><i class="fab fa-facebook-f fa-lg me-3"></i></a>
+                        <a href="#!"><i class="fab fa-twitter fa-lg me-3"></i></a>
+                        <a href="#!"><i class="fab fa-instagram fa-lg"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+              
+            
+            
+            
+
+                <% }%>
+  
+
+                  <% } else {%>
+
+                  
+                    <% }%>
+
+
+    </div>
+
+    <button data-mdb-toggle="modal"
+data-mdb-target="#" type="button" class="btn btn-info">ADD NEW</button>
+</div>
+
+  </section>

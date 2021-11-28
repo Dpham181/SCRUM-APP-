@@ -38,7 +38,7 @@ def checkPassword(UsersDB):
 @route('/Users/Profile', method='GET')
 def ListUserTeam(UsersDB):
     User_id = request.query.id
-    Profile = root.query(UsersDB, 'select FIRST_NAME,LAST_NAME,COUNTRY,ZIPCODE,CITY,STREET,STATE from Profiles where PUSER_ID =?',[User_id])
+    Profile = root.query(UsersDB, 'select EMAIL, PHONE, FIRST_NAME,LAST_NAME,COUNTRY,ZIPCODE,CITY,STREET,STATE from Profiles where PUSER_ID =?',[User_id])
     if not Profile:
         abort(400)
     rep = {'Profile': Profile}    

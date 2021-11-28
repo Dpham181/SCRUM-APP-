@@ -42,6 +42,7 @@ CREATE TABLE Members(
 );
 INSERT INTO Members(MUser_id,MTeam_id,Member_Role) VALUES
 (1,1,2),
+(2,1,3),
 (1,2,3),
 (1,3,4),
 (2,4,4),

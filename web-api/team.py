@@ -41,6 +41,10 @@ def ListMembers(TeamsDB):
     Members = root.query(TeamsDB, 'select Member_id,MUser_id, Member_Role from Members where MTeam_id =? ',[MTeam_id['Team_id']])
     if not Members:
         abort(400)
+    # get role 
+    for Member in Members:
+        stand_roles = root.query(TeamsDB, 'select Title from Roles where Role_id =? ',[Member['Member_Role']], one= True)
+        Member['Member_Role'] = stand_roles['Title']
     rep = {'Members': Members}    
     return HTTPResponse(rep,200)
 # user joins team

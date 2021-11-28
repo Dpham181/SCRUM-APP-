@@ -59,3 +59,6 @@ background-color: #1266f1;
 .pad{
 margin-left: 10px;
 }
+.col-lg-6{
+  width: 100%;
+}

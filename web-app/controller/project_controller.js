@@ -11,10 +11,18 @@ const team = require("../model/team");
 module.exports = {
 
 
-  getProjectPage:  (req, res) => {
+  getProjectPage:  async(req, res) => {
     if (req.session && req.session.Authenticated) {
-      
-        return res.render('main', {userprofile:req.session.userprofile,teams:  req.session.teams, context:'projects_context', Projects:null});
+      const userid = req.session.Authenticated;
+    try{
+        const myteams = await axios.get(gateway + "/Teams/"+ userid);
+        req.session.Teams = myteams.data.Teams
+        return res.render('main', {userprofile:req.session.userprofile,teams:  myteams.data.Teams, context:'projects_context', Projects:null});
+
+    }catch{
+      return res.redirect('/')
+
+    }
         
     
     }
@@ -23,14 +31,13 @@ module.exports = {
  
   getProjectContext: async (req, res) => {
     if (req.session && req.session.Authenticated) {
+
       try {
       
-        
          const data = {'id':req.body.team_id}
          const myprojects = await axios.post(gateway + "/Projects", data);
         
-        console.log(myprojects.data.Projects)
-         return res.render('main', {userprofile:req.session.userprofile,teams:  req.session.teams, context:'projects_context', Projects:myprojects.data.Projects});
+         return res.render('main', {userprofile:req.session.userprofile,teams:req.session.Teams , context:'projects_context', Projects:myprojects.data.Projects});
 
          
        

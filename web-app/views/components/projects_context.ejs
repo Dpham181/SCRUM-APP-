@@ -9,11 +9,12 @@
         <div class="card">
           <div class="card-header text-center py-3">
             <h5 class="mb-0 text-center">
-              <Strong>Please Choose Team:</Strong>
+            
               <form method="POST" action="/projects">
                 <div> 
                   <select class="browser-default custom-select" name="team_id" onchange="this.form.submit();" required>
-                  <% for(let i =0 ;  i < teams.length ; i++) {%>
+                    <option value="" disabled selected>Please Choose Team</option>
+                    <% for(let i =0 ;  i < teams.length ; i++) {%>
                     <option value='<%=teams[i].Team_id%>'><%=teams[i].TeamName%></option>
                     <% }%>
              

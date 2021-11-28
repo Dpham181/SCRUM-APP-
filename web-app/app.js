@@ -48,16 +48,21 @@ app.use('/LogOut/', LogoutRouter);
 const ShowTeams = require('./routes/Team/showTeams');
 const createTeam = require('./routes/Team/createTeam');
 const viewMemebers = require('./routes/Team/viewMemebers');
+const QuitTeam = require('./routes/Team/quitTeam');
 
 app.use('/Teams', ShowTeams);
 app.use('/Teams/', createTeam);
 app.use('/Memebers', viewMemebers);
+app.use('/Quit', QuitTeam);
 
 // project routing 
 const ProjectsRouter = require('./routes/project/projects');
 const Projects_contextRouter = require('./routes/project/projects_context');
+const MakeProject = require('./routes/project/make_project');
+
 app.use('/main/projects',  ProjectsRouter);
 app.use('/projects',  Projects_contextRouter);
+app.use('/projects/',  MakeProject);
 
 
 

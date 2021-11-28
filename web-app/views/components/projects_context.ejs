@@ -9,7 +9,8 @@
         <div class="card">
           <div class="card-header text-center py-3">
             <h5 class="mb-0 text-center">
-            
+              <% if(teams) {%>
+
               <form method="POST" action="/projects">
                 <div> 
                   <select class="browser-default custom-select" name="team_id" onchange="this.form.submit();" required>
@@ -22,7 +23,10 @@
              
         
               </form>
-        
+              <% } else {%>
+
+                <% }%>
+
             </h5>
           </div>
           <div class="card-body">
@@ -71,7 +75,11 @@
                   </tbody>
                 </table>
         </div>
+
     </div>
+    <button data-mdb-toggle="modal"
+    data-mdb-target="#makeproject" type="button" class="btn btn-info">New Project</button>
+    <%- include('make_project.ejs'); %>
       </section>
     
     

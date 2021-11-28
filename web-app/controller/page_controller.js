@@ -28,7 +28,7 @@ module.exports = {
 
 
        
-        return res.render('main', {userprofile:userprofile[0], context:'main_context'});
+        return res.render('main', {userprofile:userprofile[0],teams:null, context:'main_context'});
    
       }
       catch (error) {

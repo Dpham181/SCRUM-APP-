@@ -7,6 +7,8 @@ import sqlite3
 #http --verbose POST localhost:5200/Projects/ Team_id="4" Title="testing project" description="this is a test"
 @route('/Projects/', method='POST')
 def MakeProject(PojectsDB):
+        TPTeam_id = request.json
+
     statement = '''
            INSERT INTO projects(Title,description)
             VALUES(:Title, :description)

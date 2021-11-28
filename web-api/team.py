@@ -17,7 +17,6 @@ def CreateTeam(TeamsDB):
      abort(404)
     
     stmt = '''INSERT INTO Members(MUser_id,MTeam_id,Member_Role) VALUES (?,?,?)'''
-   
     root.execute(TeamsDB,stmt,[Payload['User_id'],Team.body['id'], 4])
     
     return Team
@@ -66,3 +65,17 @@ def JoinTeam(TeamsDB):
         abort(400)
     rep = {'Member_id': Member_id}    
     return HTTPResponse(rep,201)
+
+# quit team 
+#http --verbose DELETE localhost:5300/Members/Quit  team_id="3" user_id=''
+
+@route('/Members/Quit', method='DELETE')
+def JoinTeam(TeamsDB):
+    member = request.json
+    print(member)
+    if not member:
+     abort(400)
+   
+    reponse = root.query(TeamsDB, 'DELETE FROM Members WHERE MTeam_id = ? AND MUser_id=?  ',[member['team_id'], member['user_id']], one=True)
+  
+    return HTTPResponse(reponse,200)

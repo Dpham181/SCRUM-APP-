@@ -23,13 +23,12 @@ module.exports = {
     try {
       const myteams = await axios.get(gateway + "/Teams/"+ userid);
       req.session.teams = myteams.data.Teams
-   // teams 
-   return res.render('main', {userprofile: req.session.userprofile,teams:  req.session.teams, context:'teams_context'});
+      return res.render('main', {userprofile: req.session.userprofile,teams:  req.session.teams, context:'teams_context'});
    
 
     } catch (error) {
      
-        return res.redirect(req.get('referer'));
+      return res.render('main', {userprofile: req.session.userprofile,teams:  null, context:'teams_context'});
 
     }
 
@@ -61,7 +60,7 @@ module.exports = {
     }
 
   },
-
+ // view members of a team
   ViewMembers:  async (req, res) => {
    
     if(!req.session.userprofile){
@@ -84,8 +83,29 @@ module.exports = {
     members_profile.push(member_profile[0]);
   }
 
-   console.log(members_profile)
      return res.render('main', {userprofile: req.session.userprofile,teams:req.session.teams,Members:members,member_background:members_profile,context:'members_context'});
+
+
+    } catch (error) {
+     
+      return res.render('main', {userprofile: req.session.userprofile,teams:req.session.teams,Members:null, context:'teams_context'});
+
+    }
+
+  },
+
+
+  // quit a team 
+  QuitTeam:  async (req, res) => {
+   
+    try {
+    
+    const Teamid = xssFilters.inHTMLData(req.body.teamid);
+
+  
+     await axios.delete(gateway+"/Members/Quit",{data:{'team_id':Teamid , 'user_id':req.session.Authenticated}});
+    
+     return res.redirect(req.get('referer'));
 
 
     } catch (error) {

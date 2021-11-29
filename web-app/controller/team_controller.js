@@ -21,9 +21,11 @@ module.exports = {
     const userid = req.session.Authenticated;
 
     try {
-      const myteams = await axios.get(gateway + "/Teams/"+ userid);
+      // team without projects
+      const myteams= await axios.get(gateway + "/Teams/"+ userid);
+      
       req.session.teams = myteams.data.Teams
-      return res.render('main', {userprofile: req.session.userprofile,teams:  req.session.teams, context:'teams_context'});
+      return res.render('main', {userprofile: req.session.userprofile,teams:req.session.teams, context:'teams_context'});
    
 
     } catch (error) {

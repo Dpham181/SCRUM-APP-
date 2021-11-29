@@ -7,10 +7,10 @@
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"
 >
-  <div class="modal-dialog modal-xl">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">MProject Creation</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Project Creation</h5>
         <button
           type="button"
           class="btn-close"
@@ -20,45 +20,45 @@
       </div>
 
       <div class="modal-body ">
-          <div class="d-md-inline-flex flex-row justify-content-center "> 
             
    <div class="d-flex justify-content-center align-items-center">
-            <form action="/projects/"  method="post" >
-               
+            <form action="/makeprojects/"  method="post" >
+
+              <% if(team_withoutproject) {%>
+
+                <select class="browser-default custom-select" name="team_id" required>
+                    <option value="" disabled selected>Please Choose Team</option>
+                    <% for(let i =0 ;  i < team_withoutproject.length ; i++) {%>
+                    <option value='<%=team_withoutproject[i].Team_id%>'><%=team_withoutproject[i].TeamName%></option>
+                    <% }%>
+             
+                </select>
+             
+                <% }%>
             <!-- 2 column grid layout with text inputs for the first and last names -->
             <div class="form-outline mb-4">
-                <input type="text" name="TeamName" required id="form4Example1" class="form-control" />
+                <input type="text" name="Title" required id="form4Example1" class="form-control" />
                 <label class="form-label" for="form4Example1">Project Title</label>
                
               </div>
             
               <!-- des input -->
               <div class="form-outline mb-4">
-                <input type="number" name="Size" required  min=2 max=6 id="form4Example2" class="form-control" />
+                <textarea type="text" name="Description" required  class="form-control"></textarea>  
                 <label class="form-label" for="form4Example2">Description</label>
               </div>
               <div class="form-outline mb-4">
                 <input type="date" name="date" required  min="1997-01-01" max="2030-12-31" id="form4Example2" class="form-control" />
               </div>
-              <button  type="submit" class="btn btn-secondary" > Create </button>
 
-            </form></div>
+                <button  type="submit" class="btn btn-secondary" > Create </button>
+
+            </form>
+          </div>
         
         </div>
-       
-      
-         
-          
-
       </div>
-      <div class="modal-footer">
-          
-        <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
-          Close
-        </button>
-      </div>
-
-    </div>
+    
   </div>
   
 </div>    

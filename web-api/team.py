@@ -31,6 +31,23 @@ def ListUserTeam(User_id,TeamsDB):
         abort(400)
     rep = {'Teams': Teams}    
     return HTTPResponse(rep,200)
+# list all teams that user joinned with exiting project
+# http --verbose GET localhost:5300/Teams/1/
+
+@route('/Teams/<User_id>/', method='GET')
+def ListUserTeamProject(User_id,TeamsDB,PojectsDB):
+
+    Teams = root.query(TeamsDB, 'select Team_id, TeamName, Size from Teams where Team_id IN (select MTeam_id from Members where MUser_id = ?)',[User_id])
+    # all teams 
+    # list the team with projects 
+    for team in Teams:
+        Projects = root.query(PojectsDB, 'select TPproject_id from  TeamProjects where TPteam_id = ?',[team['Team_id']])
+        if not Projects:
+         Teams.remove(team)
+    if not Teams:
+        abort(400)
+    rep = {'Teams': Teams}    
+    return HTTPResponse(rep,200)
 
 # list all members of a team
 # http --verbose GET localhost:5300/Members Team_id="1"

@@ -6,15 +6,21 @@ import sqlite3
 #Make Project 
 #http --verbose POST localhost:5200/Projects/ Team_id="4" Title="testing project" description="this is a test"
 @route('/Projects/', method='POST')
-def MakeProject(PojectsDB):
-        TPTeam_id = request.json
-
-    statement = '''
-           INSERT INTO projects(Title,description)
-            VALUES(:Title, :description)
+def MakeProject(PojectsDB,TeamsDB):
+    print('here')
+    statement ='''
+           INSERT INTO projects(Title,description,DeathLine)
+            VALUES(:Title, :description,:deathline)
             '''
-    project = root.PostMethod(PojectsDB,statement,{'Team_id','Title', 'description'})
+
+    statement2 ='''INSERT INTO TeamProjects(TPProject_id,TPTeam_id, Contribution_Role) VALUES (?,?,?)'''
+    project = root.PostMethod(PojectsDB,statement,{'Title','description', 'deathline'})
+    print(project)
     
+    teamproject = root.execute(PojectsDB, statement2,[project.body['id'],project.body['Teamid'],'tester'])
+    
+    
+    print(teamproject)
     return project
 
 #list all the user's projects 

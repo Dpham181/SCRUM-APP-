@@ -62,7 +62,7 @@ const MakeProject = require('./routes/project/make_project');
 
 app.use('/main/projects',  ProjectsRouter);
 app.use('/projects',  Projects_contextRouter);
-app.use('/projects/',  MakeProject);
+app.use('/makeprojects/',  MakeProject);
 
 
 

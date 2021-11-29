@@ -59,10 +59,12 @@ app.use('/Quit', QuitTeam);
 const ProjectsRouter = require('./routes/project/projects');
 const Projects_contextRouter = require('./routes/project/projects_context');
 const MakeProject = require('./routes/project/make_project');
+const Project_details = require('./routes/project/project_details');
 
 app.use('/main/projects',  ProjectsRouter);
 app.use('/projects',  Projects_contextRouter);
 app.use('/makeprojects/',  MakeProject);
+app.use('/project',  Project_details);
 
 
 

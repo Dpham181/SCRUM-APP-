@@ -35,10 +35,23 @@ def MakeProject(PojectsDB,TeamsDB):
 def ListProjects(PojectsDB):
     TPTeam_id = request.json
     print(TPTeam_id)
-    Projects = root.query(PojectsDB, 'select Title, description, Deathline from Projects where Project_id IN (select TPproject_id from  TeamProjects where TPteam_id = ?)',[TPTeam_id['id']])
+    Projects = root.query(PojectsDB, 'select Project_id,Title, description, Deathline from Projects where Project_id IN (select TPproject_id from  TeamProjects where TPteam_id = ?)',[TPTeam_id['id']])
     if not Projects:
         abort(400)
     print(Projects)
     rep = {'Projects': Projects}    
     return HTTPResponse(rep,200)
-   
+
+
+# getting details of specifit project
+#http --verbose get localhost:5200/Project/1
+
+@route('/Projects/<project_id>', method='GET')
+def getProject(PojectsDB,project_id ):
+    Project = root.query(PojectsDB, 'select Title, description, Deathline from Projects where Project_id =?',[project_id])
+    if not Project:
+        abort(400)
+    print(Project)
+    rep = {'Project': Project}    
+    return HTTPResponse(rep,200)
+     

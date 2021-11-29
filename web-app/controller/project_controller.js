@@ -75,7 +75,7 @@ module.exports = {
         const deathline = xssFilters.inHTMLData(req.body.date);
  
          const project = {'Teamid':teamid, 'Title':Title, 'description':description, 'deathline':deathline}
-          const myprojects = await axios.post(gateway + "/Projects/", project);
+         await axios.post(gateway + "/Projects/", project);
         
          return res.redirect('/main/projects');
 
@@ -94,6 +94,31 @@ module.exports = {
     return res.redirect('/')
   },
  
+  // project details 
+  getProjectdetails: async (req, res) => {
+    if (req.session && req.session.Authenticated) {
 
+      try {
+      
+        const projectid = xssFilters.inHTMLData(req.body.projectid);       
+         console.log(projectid)
+         console.log(gateway + "/Projects/" + projectid)
+
+        const project = await axios.get(gateway + "/Projects/" + projectid);
+         
+        console.log(project)
+         return res.render('main', {userprofile:req.session.userprofile,project:project.data.Project[0], context:'project_details' });
+
+         
+       
+        
+      }
+      catch (error) {
+
+      }
+
+    }
+    return res.redirect('/')
+  },
 
 }

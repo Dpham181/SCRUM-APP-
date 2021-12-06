@@ -101,25 +101,21 @@ module.exports = {
 
       try {
       
-        const projectid = xssFilters.inHTMLData(req.body.projectid);   
+        const projectid = xssFilters.inHTMLData(req.body.projectid); 
+        req.session.projectid =  projectid; 
+        
         const teamid =    req.session.teamid; 
-        if (projectid){
-          req.session.projectid =  projectid ;
-
-        }else
-        {
-          projectid = req.session.projectid;
-        }
-        const data = {project_id:projectid,team_id:teamid }
-        const project = await axios.get(gateway + "/Projects/" + projectid);
+       
+        const data = {project_id: projectid,team_id:teamid }
+        const project = await axios.get(gateway + "/Projects/" +  projectid);
          // project info
-        const teamsproject = await axios.get(gateway + "/Projects/Teams/" + projectid);
+        const teamsproject = await axios.get(gateway + "/Projects/Teams/" +  projectid);
         // teams contributes 
         const teamproject = await axios.post(gateway + "/Projects/Team/" , data);
         const totalteams = teamsproject.data.Teamsproject.length;
         // backlogs 
-        const productbacklog = await axios.get(gateway + "/Backlogs/Product/" + projectid);
-        const srpintbacklog = await axios.get(gateway + "/Backlogs/Sprint/" + projectid);
+        const productbacklog = await axios.get(gateway + "/Backlogs/Product/" +  projectid);
+        const srpintbacklog = await axios.get(gateway + "/Backlogs/Sprint/" +  projectid);
 
      
      
@@ -175,9 +171,27 @@ module.exports = {
         const data = {PItem_id:item_id,Iteration_Number:Iteration_Number,Use_Stories:User_Stories}
         await axios.post(gateway + "/Backlogs/Sprint/" , data);
         
+        const projectid =  req.session.projectid;
+
+        const teamid =    req.session.teamid; 
+
+        const data2 = {project_id: projectid,team_id:teamid }
+        const project = await axios.get(gateway + "/Projects/" +  projectid);
+         // project info
+        const teamsproject = await axios.get(gateway + "/Projects/Teams/" +  projectid);
+        // teams contributes 
+        const teamproject = await axios.post(gateway + "/Projects/Team/" , data2);
+        const totalteams = teamsproject.data.Teamsproject.length;
+        // backlogs 
+        const productbacklog = await axios.get(gateway + "/Backlogs/Product/" +  projectid);
+        const srpintbacklog = await axios.get(gateway + "/Backlogs/Sprint/" +  projectid);
+
      
      
-        return res.redirect('/main/projects');
+        return res.render('main', {projectid:projectid,userprofile:req.session.userprofile,sprintbl:srpintbacklog.data.Spint_items ,productbl:productbacklog.data.Product_items, project:project.data.Project[0],totalteams:totalteams, contribute:teamproject.data.Teamproject[0], context:'project_details' });
+
+         
+
 
          
        

@@ -20,7 +20,8 @@ def CreateProductBL(BacklogsDB):
 def GetProductBL(Product_id,BacklogsDB):
     Produc_items = root.query(BacklogsDB, 'select Item_id, description from productbacklog where Product_id =?',[Product_id]);
     if not Produc_items:
-        abort(400)
+       rep = {'Product_items': []}    
+       return HTTPResponse(rep,200)
     rep = {'Product_items': Produc_items}    
     return HTTPResponse(rep,200)
 
@@ -42,6 +43,7 @@ def CreateSprintBL(BacklogsDB):
 def GetSprintBL(Product_id,BacklogsDB):
     Spint_items = root.query(BacklogsDB, 'select Sprint_id,PItem_id, Iteration_Number,Use_Stories, Status from sprintbacklog where PItem_id IN (select Item_id from productbacklog where Product_id = ? )',[Product_id]);
     if not Spint_items:
-        abort(400)
+       rep = {'Spint_items': []}    
+       return HTTPResponse(rep,200)
     rep = {'Spint_items': Spint_items}    
     return HTTPResponse(rep,200)

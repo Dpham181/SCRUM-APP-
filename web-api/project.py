@@ -55,3 +55,27 @@ def getProject(PojectsDB,project_id ):
     rep = {'Project': Project}    
     return HTTPResponse(rep,200)
      
+# getting details of project base on team contribution
+#http --verbose get localhost:5200/Projects/Teams/1
+@route('/Projects/Teams/<project_id>', method='GET')
+def getProjectTeams(PojectsDB,project_id ):
+    Teamsproject = root.query(PojectsDB, 'select TeamProjects_id,TPTeam_id, Contribution_Role from TeamProjects where TPProject_id =?',[project_id])
+    if not Teamsproject:
+        abort(400)
+    print(Teamsproject)
+    rep = {'Teamsproject': Teamsproject}    
+    return HTTPResponse(rep,200)
+
+     
+# getting details of project base on specifit team
+#http --verbose get localhost:5200/Projects/Team/  project_id="1"  team_id="1"
+@route('/Projects/Team/', method='POST')
+def getProjectTeam(PojectsDB):
+    info = request.json
+
+    Teamproject = root.query(PojectsDB, 'select TeamProjects_id, Contribution_Role from TeamProjects where TPProject_id =? and TPTeam_id =?',[info['project_id'],info['team_id']])
+    if not Teamproject:
+        abort(400)
+    print(Teamproject)
+    rep = {'Teamproject': Teamproject}    
+    return HTTPResponse(rep,200)

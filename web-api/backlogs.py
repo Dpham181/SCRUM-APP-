@@ -21,7 +21,7 @@ def GetProductBL(Product_id,BacklogsDB):
     Produc_items = root.query(BacklogsDB, 'select Item_id, description from productbacklog where Product_id =?',[Product_id]);
     if not Produc_items:
         abort(400)
-    rep = {'Produc_items': Produc_items}    
+    rep = {'Product_items': Produc_items}    
     return HTTPResponse(rep,200)
 
 # Sprint backlog
@@ -40,7 +40,7 @@ def CreateSprintBL(BacklogsDB):
 #http --verbose GET localhost:5400/Backlogs/Sprint/1
 @route('/Backlogs/Sprint/<Product_id>', method='GET')
 def GetSprintBL(Product_id,BacklogsDB):
-    Spint_items = root.query(BacklogsDB, 'select Sprint_id, Iteration_Number,Use_Stories, Status from sprintbacklog where PItem_id IN (select Item_id from productbacklog where Product_id = ? )',[Product_id]);
+    Spint_items = root.query(BacklogsDB, 'select Sprint_id,PItem_id, Iteration_Number,Use_Stories, Status from sprintbacklog where PItem_id IN (select Item_id from productbacklog where Product_id = ? )',[Product_id]);
     if not Spint_items:
         abort(400)
     rep = {'Spint_items': Spint_items}    

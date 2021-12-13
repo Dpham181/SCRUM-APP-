@@ -45,6 +45,7 @@ module.exports = {
       try {
       
          const data = {'id':req.body.team_id}
+         req.session.teamid = req.body.team_id;
          const myprojects = await axios.post(gateway + "/Projects", data);
         
          return res.render('main', {userprofile:req.session.userprofile,team_withoutproject:req.session.team_withoutproject,teams:req.session.Teams , context:'projects_context', Projects:myprojects.data.Projects});
@@ -75,7 +76,7 @@ module.exports = {
         const deathline = xssFilters.inHTMLData(req.body.date);
  
          const project = {'Teamid':teamid, 'Title':Title, 'description':description, 'deathline':deathline}
-          const myprojects = await axios.post(gateway + "/Projects/", project);
+         await axios.post(gateway + "/Projects/", project);
         
          return res.redirect('/main/projects');
 
@@ -94,6 +95,115 @@ module.exports = {
     return res.redirect('/')
   },
  
+  // project details 
+  getProjectdetails: async (req, res) => {
+    if (req.session && req.session.Authenticated) {
 
+      try {
+      
+        const projectid = xssFilters.inHTMLData(req.body.projectid); 
+        req.session.projectid =  projectid; 
+        
+        const teamid =    req.session.teamid; 
+       
+        const data = {project_id: projectid,team_id:teamid }
+        const project = await axios.get(gateway + "/Projects/" +  projectid);
+         // project info
+        const teamsproject = await axios.get(gateway + "/Projects/Teams/" +  projectid);
+        // teams contributes 
+        const teamproject = await axios.post(gateway + "/Projects/Team/" , data);
+        const totalteams = teamsproject.data.Teamsproject.length;
+        // backlogs 
+        const productbacklog = await axios.get(gateway + "/Backlogs/Product/" +  projectid);
+        const srpintbacklog = await axios.get(gateway + "/Backlogs/Sprint/" +  projectid);
+
+     
+     
+        return res.render('main', {projectid:projectid,userprofile:req.session.userprofile,sprintbl:srpintbacklog.data.Spint_items ,productbl:productbacklog.data.Product_items, project:project.data.Project[0],totalteams:totalteams, contribute:teamproject.data.Teamproject[0], context:'project_details' });
+
+         
+       
+        
+      }
+      catch (error) {
+
+      }
+
+    }
+    return res.redirect('/')
+  },
+
+
+  addProductBL: async (req, res) => {
+    if (req.session && req.session.Authenticated) {
+      console.log('here')
+      try {
+      
+        const projectid = xssFilters.inHTMLData(req.body.projectid);       
+        const des = xssFilters.inHTMLData(req.body.Description); 
+
+        const data = {Product_id:projectid,description:des}
+        await axios.post(gateway + "/Backlogs/Product/" , data);
+        
+     
+     
+        return res.redirect(307,'/project');
+
+         
+       
+        
+      }
+      catch (error) {
+        console.log('err')
+
+      }
+
+    }
+    return res.redirect('/')
+  },
+  addSprintBL: async (req, res) => {
+    if (req.session && req.session.Authenticated) {
+      try {
+      
+        const item_id = xssFilters.inHTMLData(req.body.item_id);       
+        const Iteration_Number = xssFilters.inHTMLData(req.body.Iteration_Number); 
+        const User_Stories = xssFilters.inHTMLData(req.body.User_Stories); 
+        const data = {PItem_id:item_id,Iteration_Number:Iteration_Number,Use_Stories:User_Stories}
+        await axios.post(gateway + "/Backlogs/Sprint/" , data);
+        
+        const projectid =  req.session.projectid;
+
+        const teamid =    req.session.teamid; 
+
+        const data2 = {project_id: projectid,team_id:teamid }
+        const project = await axios.get(gateway + "/Projects/" +  projectid);
+         // project info
+        const teamsproject = await axios.get(gateway + "/Projects/Teams/" +  projectid);
+        // teams contributes 
+        const teamproject = await axios.post(gateway + "/Projects/Team/" , data2);
+        const totalteams = teamsproject.data.Teamsproject.length;
+        // backlogs 
+        const productbacklog = await axios.get(gateway + "/Backlogs/Product/" +  projectid);
+        const srpintbacklog = await axios.get(gateway + "/Backlogs/Sprint/" +  projectid);
+
+     
+     
+        return res.render('main', {projectid:projectid,userprofile:req.session.userprofile,sprintbl:srpintbacklog.data.Spint_items ,productbl:productbacklog.data.Product_items, project:project.data.Project[0],totalteams:totalteams, contribute:teamproject.data.Teamproject[0], context:'project_details' });
+
+         
+
+
+         
+       
+        
+      }
+      catch (error) {
+        console.log('err')
+
+      }
+
+    }
+    return res.redirect('/');
+  },
 
 }

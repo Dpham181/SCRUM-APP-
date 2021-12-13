@@ -53,8 +53,18 @@
                         <td><%=Projects[i].Title%></td>
                         <td><%=Projects[i].description%></td>
                         <td><%=Projects[i].Deathline%></td>
+                        <td>   <form action="/submit" method="post">
+                          <input type="hidden" name="projectid" value="<%=Projects[i].Project_id%>" >
 
-
+                          <button
+                          type="submit"
+                          formaction="/project"
+                          class="btn btn-outline-info btn-rounded"
+                          data-mdb-ripple-color="dark"
+                        >
+                    Access </button>
+                    </form></td>
+                     
                       </tr>
 
                       <% }%>

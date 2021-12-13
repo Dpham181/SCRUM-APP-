@@ -87,7 +87,7 @@ def JoinTeam(TeamsDB):
 #http --verbose DELETE localhost:5300/Members/Quit  team_id="3" user_id=''
 
 @route('/Members/Quit', method='DELETE')
-def JoinTeam(TeamsDB):
+def QuitTeam(TeamsDB):
     member = request.json
     print(member)
     if not member:
